@@ -1,19 +1,14 @@
 import playwright from 'playwright'
 
 async function scrape (userData) {
-  const browser = await playwright.firefox.launch({
-    headless: false // to be able to watch what's going on.
-  })
+  const browser = await playwright.firefox.launch({ headless: false })
 
   const page = await browser.newPage()
 
   await page.goto('https://google.com/')
-  await page.waitForTimeout(1000)
   await page.fill('form[action="/search"] input[type="text"]', userData)
-  await page.waitForTimeout(1000)
   await page.keyboard.press('Enter')
-
-  await page.waitForTimeout(30000)
+  await page.waitForEvent('close', { timeout: 60000 }).catch(e => console.log('closing browser after 60 sec timeout'))
   await browser.close()
 }
 
