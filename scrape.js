@@ -1,15 +1,27 @@
 import playwright from 'playwright'
 
-async function scrape (userData) {
-  const browser = await playwright.firefox.launch({ headless: false })
+const headless = true
 
+async function scrape(query, searchUrl = 'https://google.com/search') {
+  const browser = await playwright.firefox.launch({ headless })
   const page = await browser.newPage()
+  const url = new URL(searchUrl)
 
-  await page.goto('https://google.com/')
-  await page.fill('form[action="/search"] input[type="text"]', userData)
-  await page.keyboard.press('Enter')
-  await page.waitForEvent('close', { timeout: 60000 }).catch(e => console.log('closing browser after 60 sec timeout'))
+  url.searchParams.set('q', query)
+  url.searchParams.set('num', 50)
+  await page.goto(url.href, { waitUntil: 'domcontentloaded' })
+
+  const locator = page.locator('#search a')
+  const results = await locator.evaluateAll(anchors => anchors.reduce((acc, cur) => {
+    // For Google, get results that include a "cite" element to omit non-search-related hrefs
+    if (cur.nextElementSibling?.querySelector('cite')) acc.push(cur.href)
+    return acc
+  }, []))
+
+  if (!headless) await page.pause()
+
   await browser.close()
+  return results
 }
 
 export { scrape }
