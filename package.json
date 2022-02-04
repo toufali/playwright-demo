@@ -33,8 +33,10 @@
     "ignore": [
       "test/*"
     ],
+    "ext": "js,json",
     "watch": [
-      ".env"
+      ".",
+      "./.env"
     ]
   }
 }

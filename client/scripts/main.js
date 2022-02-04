@@ -45,6 +45,7 @@ const detailView = data => `
 </figure>
 `
 
+form.querySelector('[data-headless]').toggleAttribute('hidden', location.hostname !== 'localhost')
 form.addEventListener('submit', handleSubmit)
 output.addEventListener('click', handleOutputClick)
 
