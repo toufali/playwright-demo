@@ -1,0 +1,116 @@
+*{
+  font: inherit;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  font: normal 400 1rem/1.5 sans-serif;
+  background: radial-gradient(circle farthest-corner at bottom, #211931, black);
+  height: 100vh;
+  background-attachment: fixed;
+  padding: 24px 0;
+}
+
+main{
+  background-color: rgb(45, 41, 51);
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+h1, h2, h3{
+  font-weight: bold;
+}
+
+h1{
+  font-size: 2rem;
+}
+
+h2{
+  font-size: 1.5rem;
+}
+
+figure{
+  margin: 0;
+}
+
+form{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 12px;
+  justify-content: center;
+}
+
+form > * {
+  background-color: #ccccdd;
+  border-radius: 3px;
+  border: none;
+  line-height: 30px;
+  text-align: center;
+  margin: 6px;
+  padding: 0 12px;
+  color: #333
+}
+
+input{
+  border-radius: 3px;
+  border: 1px solid #bbb;
+  background-color: #eee;
+  line-height: 24px;
+  padding: 0 6px;
+  outline: none;
+}
+
+ul{
+  list-style-position: inside;
+}
+
+button[type="submit"]{
+  background-color: #c1e8c7;
+  font-weight: bold;
+}
+
+button:active{
+  background-color: #bbb;
+}
+
+button[data-broker]{
+  padding: 0 6px;
+  background: #eed5b9;
+  border: 1px solid #bbb;
+  line-height: 24px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: bold;
+  height: 24px;
+  color: #333;
+}
+
+output{
+  width: 100%;
+  text-align: left;
+}
+
+output:empty:not(.loading){
+  display: none;
+}
+
+.loading:after {
+  content: '';
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin: 12px auto;
+  border-radius: 50%;
+  border: 3px solid;
+  border-color: currentColor transparent;
+  animation: rotate 1s ease infinite;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+  
