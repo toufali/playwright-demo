@@ -14,6 +14,8 @@ router.post('/screenshot', async function (req, res) {
 async function getScreenshot(link) {
   const browser = await playwright.firefox.launch({ headless })
   const page = await browser.newPage({
+    extraHTTPHeaders: { 'Referer': 'https://www.google.com/' },
+    userAgent: 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Googlebot/2.1; +http://www.google.com/bot.html) Chrome/W.X.Y.Z Safari/537.36',
     viewport: {
       width: 1280,
       height: 720
